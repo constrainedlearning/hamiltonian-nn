@@ -31,6 +31,10 @@ def rk4(fun, y0, t, dt, *args, **kwargs):
 def L2_loss(u, v):
   return (u-v).pow(2).mean()
 
+def lagrangian(dxdt, dxdt_hat, mu):
+  return L2_loss(dxdt, dxdt_hat) + mu*(dxdt_hat[:,0]-dxdt_hat[:,1]).pow(2).mean()
+
+
 
 def read_lipson(experiment_name, save_dir):
   desired_file = experiment_name + ".txt"

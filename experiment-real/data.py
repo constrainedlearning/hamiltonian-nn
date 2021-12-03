@@ -28,11 +28,11 @@ def get_dataset(experiment_name, save_dir, test_split=0.8):
   else:
     assert experiment_name in ['sim', 'real']
 
-  url = 'http://science.sciencemag.org/highwire/filestream/590089/field_highwire_adjunct_files/2/'
+  url = 'https://www.science.org/doi/suppl/10.1126/science.1165893/suppl_file'
   os.makedirs(save_dir) if not os.path.exists(save_dir) else None
   out_file = '{}/invar_datasets.zip'.format(save_dir)
-  
-  urlretrieve(url, out_file)
+  if not os.path.exists(out_file):
+    urlretrieve(url, out_file)
 
   data_str = read_lipson(dataset_name, save_dir)
   state, names = str2array(data_str)
